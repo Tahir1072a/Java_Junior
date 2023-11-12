@@ -2,6 +2,9 @@
     /* Java tip güvenli bir dildir. */
 
 public class Main {
+    static {
+        System.out.println("ilk");
+    }
     public static void main(String[] args) {
 
         /* Ekrana çıktı basar. */
@@ -103,8 +106,100 @@ public class Main {
             }
             System.out.println();
         }
+
+        //Strings
+        String mesaj = "Bugün hava çok güzel";
+        System.out.println(mesaj);
+
+        System.out.println("Eleman sayısı : " + mesaj.length());
+        // 4. indeksteki karakteri ekrana yazdırır.
+        System.out.println("5. eleman : " + mesaj.charAt(4));
+        // ligili stringin sonuna ekleme yapar.
+        System.out.println(mesaj.concat("Dışarı çıkalım mı?"));
+        System.out.println(mesaj.startsWith("B"));
+
+
+        //Mini Projeler
+        int[] dizi = new int[] {5,10,12,43,52,72,100};
+        Demo3 d3 = new Demo3();
+        System.out.println(d3.IsAsal(1));
+        System.out.println(d3.IsPerfectNumber(8128));
+        System.out.println(d3.Find(dizi,12));
+
+        //Sadık
+
+        Sadık sadık=new Sadık(2);
+        System.out.println("SADIK 2 NESENESI URETILIYOR");
+        sadık2 sadık2a=new sadık2();
+
+        System.out.println(sadık.sadik);
+
+        // Enums
+        enum Gunler {
+            Pazartesi,
+            Salı,
+            Çarşamba,
+            Perşembe,
+            Cuma,
+            Cumartesi,
+            Pazar;
+
+            public boolean isÇalışmaGünüdür() {
+                return this != Cumartesi && this != Pazar;
+            }
+            }
+        Gunler gun = Gunler.Cumartesi;
+        gun.isÇalışmaGünüdür();
+
+
+         Mevsim.IsMevsim("ilkbahar").Print();
+         for(Mevsim m : Mevsim.values()){
+             System.out.println(m.Id());
+         }
+         //Classes
+         int a = 3;
+
+         Calculator calculator1 = new Calculator();
+         System.out.println(calculator1.Collect(1,5,90,23,45,43,21,10));
+
+
+
     }
 }
+
+    class Sadık implements IDeneme
+    {
+        public  Sadık()
+        {
+            System.out.println("Sadık sınıfı olusturuldu");
+        }
+        public Sadık(int a)
+        {
+            this();
+            System.out.println("Sadık sınıfının 2. ctorudur degeri"+a);
+        }
+        public int deger;
+
+
+        @Override
+        public int Yumruk(int a){
+            return a;
+        }
+    }
+    class sadık2 extends Sadık
+    {
+        public  String deneme;
+        public  sadık2()
+        {
+            System.out.println("SADIK2 INIFI OLUSTURULDU");
+        }
+    }
+
+    interface IDeneme
+    {
+        int Yumruk(int a);
+        int sadik = 10;
+    }
 
 class Demo1{
     int sayi1 = 200,sayi2= 37,sayi3 = 40;
@@ -164,5 +259,58 @@ class Demo2{
                 maxNumber = data;
         }
         System.out.println("Max number : " + maxNumber);
+    }
+}
+
+class Demo3{
+    
+    public boolean IsAsal(int _number){
+        //Döngü değişkeni
+        int i;
+        if(_number == 2)
+            return true;
+        else if(_number < 0){
+            return false;
+        }
+        else{
+            // Sayının kendisine gelene kadar bölme işlemi yapar ve eğer tam bölebilirse asal olmadığı anlaşılır.
+            for(i = 2; i < _number &&  _number % i != 0;i++);
+            // Sayı döngüden çıktıktan eğer bölünmemişse numbera eşit olmalı.
+            if(i == _number) return true;
+        }
+        return false;
+
+    }
+    //mükemmel sayı : bölenleri toplamı kendisini veren sayıdır.
+    public boolean IsPerfectNumber(int _number){
+
+        int total = 0;
+        if(IsAsal(_number)) return false;
+        for (int i = 1; i < _number; i++){
+            if(_number % i == 0) total += i;
+        }
+        if(total == _number) return true;
+        return false;
+    }
+    public int Find(int[] numbers , int finded){
+
+        int i = 0,j = numbers.length, pivot;
+        while(i < j){
+            pivot = (( j - i ) / 2) + i;
+            if(numbers[pivot] == finded) return pivot;
+            else if(numbers[pivot] < finded){
+               i = pivot;
+            }
+            else{
+                j = pivot;
+            }
+        }
+
+        return -1;
+    }
+}
+class StatikDeneme{
+    static {
+        System.out.println("Static bloğumuz (Deneme)");
     }
 }
